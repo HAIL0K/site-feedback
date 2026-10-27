@@ -5,21 +5,32 @@ anything on screen) and draw on it. When you click Stop, your agent gets a timel
 you said with your marked-up screenshots, and turns it into a list of changes for you to
 confirm.
 
-Windows and macOS. Everything runs on your computer: the transcription is local Whisper,
-and nothing is uploaded.
+Everything runs on your computer: the transcription is local Whisper, and nothing is
+uploaded. Free and open source (MIT).
+
+| Platform | Status |
+|---|---|
+| Windows 10/11 | Tested, including two-screen setups |
+| macOS | Written for it, not yet tested on a real Mac. [Reports welcome](../../issues) |
+| Linux | Not supported yet |
 
 ## For the person
 
-Give your agent this folder and say:
+Tell your agent:
 
-> Set up site-feedback from this folder for me.
+> Set up https://github.com/HAIL0K/site-feedback for me.
 
 After that, whenever you want to give feedback, say "let's do site feedback". A small bar
 appears with Draw and Stop buttons. Talk, click Draw to circle things, click Stop when done.
 
+Screenshots capture the whole screen the bar is on, not only your website, so keep private
+windows on another screen while you record. Recordings stay in `~/site-feedback/` on your
+computer.
+
 ## For the agent
 
-Setup, once: `python install.py` (Python 3.10+ with Tk; on macOS use the python.org
+Setup, once: clone the repo to a permanent place (the skill points at its `.venv`), then
+`python install.py` (Python 3.10+ with Tk; on macOS use the python.org
 installer). It creates `.venv`, installs the tool, downloads the speech model, installs the
 skill to `~/.claude/skills/site-feedback/`, and runs `site_feedback check`. On macOS the
 person must approve the Screen Recording and Microphone prompts for the app you run in, then
@@ -53,3 +64,7 @@ full-screen with a red border. You draw on that picture, and Done drawing saves 
 you back. This works the same on Windows and macOS, without transparent-window tricks, and the
 saved image is exactly what you saw. Scroll or click on your site between drawings, not
 during one.
+
+## Contributing
+
+Issues and pull requests welcome, see [CONTRIBUTING.md](CONTRIBUTING.md). License: [MIT](LICENSE).

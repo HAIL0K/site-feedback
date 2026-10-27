@@ -29,7 +29,8 @@ computer.
 
 ## For the agent
 
-Setup, once: clone the repo to a permanent place (the skill points at its `.venv`), then
+Read [AGENTS.md](AGENTS.md) first: it has the setup steps and what to tell the person at
+each one. Short version: clone the repo to `~/Tools/site-feedback`, then
 `python install.py` (Python 3.10+ with Tk; on macOS use the python.org
 installer). It creates `.venv`, installs the tool, downloads the speech model, installs the
 skill to `~/.claude/skills/site-feedback/`, and runs `site_feedback check`. On macOS the

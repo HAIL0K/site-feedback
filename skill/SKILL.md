@@ -11,6 +11,10 @@ path or an error message they have to act on: you handle all of that.
 
 ## 1. Start the recorder
 
+If this is their first time, first say in one sentence what will happen ("A small bar
+will appear; talk me through the changes, click Draw to point at things, Stop when
+done") so the bar doesn't surprise them.
+
 Run this in the background (Claude Code: Bash with `run_in_background: true`, because
 the recording can last longer than a normal command timeout):
 
@@ -20,11 +24,11 @@ the recording can last longer than a normal command timeout):
 
 Then tell the person, in these words or close to them:
 
-> A small bar with Draw and Stop just appeared in the top-right of your screen.
+> A small dark bar with Draw and Stop just appeared in the top-right of your screen.
 > Talk me through everything you want changed, like you would to a person sitting
 > next to you. Whenever you want to point at something, click Draw, circle or
-> scribble on it, and click Done drawing. You can drag the bar to the screen your site is on.
-> Click Stop when you're finished.
+> scribble on it, and click Done. You can drag the bar to the screen your site is on.
+> Click Stop when you're finished. The bar says "Done" when I have it.
 
 Don't poll while they talk. You are notified when the command exits.
 

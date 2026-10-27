@@ -76,20 +76,24 @@ def cmd_record(args) -> int:
     stamp = datetime.now()
     out = Path(args.out) if args.out else Path.home() / "site-feedback" / stamp.strftime("%Y-%m-%d_%H%M%S")
     rec = Recorder(out, audio=not args.no_audio)
-    app = App(rec)
+
+    def on_stop() -> Path:
+        # Runs in a worker thread while the bar shows "Sending to your agent".
+        duration = rec.stop()
+        session = {"started_at": stamp.strftime("%Y-%m-%d %H:%M"), "duration": round(duration, 1),
+                   "frames": rec.frames, "drawings": rec.drawings, "segments": []}
+        (out / "session.json").write_text(json.dumps(session, indent=2), encoding="utf-8")
+        say(f"Stopped after {duration:.0f}s: {len(rec.drawings)} drawings, {len(rec.frames)} screenshots.")
+        return finish(out, transcribe=not args.no_transcribe and not args.no_audio)
+
+    app = App(rec, on_stop)
     if args.selftest:
-        app.selftest()
+        app.selftest(out)
     rec.start()
     say(f"Recording. Session folder: {out}")
-    try:
-        app.run()
-    finally:
-        duration = rec.stop()
-    session = {"started_at": stamp.strftime("%Y-%m-%d %H:%M"), "duration": round(duration, 1),
-               "frames": rec.frames, "drawings": rec.drawings, "segments": []}
-    (out / "session.json").write_text(json.dumps(session, indent=2), encoding="utf-8")
-    say(f"Stopped after {duration:.0f}s: {len(rec.drawings)} drawings, {len(rec.frames)} screenshots.")
-    md = finish(out, transcribe=not args.no_transcribe and not args.no_audio)
+    md = app.run()
+    if md is None:  # window closed some other way before Stop
+        md = on_stop()
     say(f"FEEDBACK READY: {md}")
     return 0
 

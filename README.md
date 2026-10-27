@@ -61,7 +61,7 @@ an NVIDIA GPU).
 ## How drawing works
 
 Draw freezes the screen: it takes a screenshot of the monitor the bar is on and shows it
-full-screen with a red border. You draw on that picture, and Done drawing saves it and puts
+full-screen with a red border. You draw on that picture, and Done saves it and puts
 you back. This works the same on Windows and macOS, without transparent-window tricks, and the
 saved image is exactly what you saw. Scroll or click on your site between drawings, not
 during one.

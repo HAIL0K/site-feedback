@@ -1,0 +1,16 @@
+[project]
+name = "site-feedback"
+version = "0.1.0"
+description = "Record your screen and voice, draw on it, and hand the result to your coding agent."
+requires-python = ">=3.10"
+dependencies = ["mss>=9", "pillow>=10", "sounddevice>=0.4.6", "numpy>=1.24", "faster-whisper>=1.0"]
+
+[project.scripts]
+site-feedback = "site_feedback.__main__:main"
+
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["site_feedback"]
